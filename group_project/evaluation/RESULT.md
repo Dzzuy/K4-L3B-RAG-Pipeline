@@ -31,6 +31,11 @@ Hai config phải dùng cùng golden dataset, generator, evaluator, prompt và `
 | Context precision |                0.9358 |                  0.9306 |   -0.0052 |
 | **Average**       |            **0.8855** |              **0.9602** | **+0.0747** |
 
+### Breakdown theo nhóm câu hỏi (Config B):
+- **Dễ tìm theo từ khóa (Keyword - 5 cases):** Recall = 0.9700 | Precision = 0.9524 | Faithfulness = 0.9800 | Relevance = 0.9869 (BM25 bắt trọn vẹn số ngày quy định, mã định danh ShopeePay).
+- **Tương đồng ngữ nghĩa (Semantic - 6 cases):** Recall = 0.9380 | Precision = 0.9056 | Faithfulness = 0.9750 | Relevance = 0.9623 (Dense kết hợp BM25 giúp hiểu câu hỏi tự nhiên về quyền lợi).
+- **Dễ nhầm giữa các nguồn (Cross-source - 5 cases):** Recall = 0.9520 | Precision = 0.9333 | Faithfulness = 0.9880 | Relevance = 0.9790 (Phân biệt rành mạch quyền hạn Người Mua vs Người Bán, Shopee Mall vs Shopee thường).
+
 ## A/B comparison
 
 - **Cấu hình tốt hơn**: **Config B — Hybrid + RRF** vượt trội trên 3/4 chỉ số trọng yếu.
@@ -39,7 +44,7 @@ Hai config phải dùng cùng golden dataset, generator, evaluator, prompt và `
   - Faithfulness tăng **+9.49%** (từ 0.8863 lên 0.9812) và Answer Relevance tăng **+13.17%** (từ 0.8445 lên 0.9762), chứng minh ngữ cảnh trả về từ RRF giúp LLM trả lời chuẩn xác và hạn chế tối đa suy diễn ngoài văn bản.
 - **Trade-off về latency/cost**:
   - Độ trễ trung bình của Hybrid RRF (~103.9 ms) hoàn toàn tương đương Dense-Only (~137.2 ms) sau khi loại bỏ chi phí warm-up mô hình ban đầu.
-  - Chi phí CPU bổ sung cho thuật toán BM25 và phép cộng RRF chỉ khoảng ~5–10ms, hoàn toàn nằm trong giới hạn ngân sách thời gian thực tế.
+  - Chi phí CPU bổ sung cho thuật toán BM25 và phép cộng RRF chỉ khoảng ~5–10ms, hoàn toàn nằm trong giới hạn ngân sách thời gian thực tế (<500ms).
 
 ## Worst performers
 

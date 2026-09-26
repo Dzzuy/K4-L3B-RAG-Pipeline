@@ -55,3 +55,10 @@ pageindex_pdfs/
 # OS
 .DS_Store
 Thumbs.db
+
+
+Day-8-Lab-8-Guide.txt
+VibecodeKit
+
+chroma_db/
+data/pageindex_docs.json
